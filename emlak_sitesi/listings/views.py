@@ -11,6 +11,10 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Listing
 from .serializers import ListingSerializer
 from rest_framework.permissions import IsAdminUser
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Listing
+
+
 class ListingList(APIView):
     def get(self, request):
         listings = Listing.objects.all()
@@ -34,3 +38,28 @@ class ListingUpdate(UpdateAPIView):
     serializer_class = ListingSerializer
     permission_classes = [IsAuthenticated]  # Sadece giriş yapmış kullanıcılar
     permission_classes = [IsAdminUser]
+
+def home(request):
+    listings = Listing.objects.all()
+    return render(request, 'home.html', {'listings': listings})
+
+def listing_detail(request, pk):
+    listing = get_object_or_404(Listing, pk=pk)
+    return render(request, 'listing_detail.html', {'listing': listing})
+
+def add_listing(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        price = request.POST['price']
+        type = request.POST['type']
+        description = request.POST['description']
+        contact_number = request.POST['contact_number']
+        Listing.objects.create(
+            title=title,
+            price=price,
+            type=type,
+            description=description,
+            contact_number=contact_number,
+        )
+        return redirect('home')
+    return render(request, 'add_listing.html')
