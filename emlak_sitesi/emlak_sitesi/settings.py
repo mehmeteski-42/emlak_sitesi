@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'emlak_sitesi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'emlak_sitesi',
+        'NAME': 'emlak_veritabani',
         'USER': 'root',  # MySQL kullanıcı adı
-        'PASSWORD': 'sew810i2053',  # MySQL şifresi
+        'PASSWORD': '1234',  # MySQL şifresi
         'HOST': 'localhost',
         'PORT': '3306',
     }
