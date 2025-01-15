@@ -1,3 +1,5 @@
+from cgi import print_form
+
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -47,6 +49,26 @@ def listing_detail(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, 'listing_detail.html', {'listing': listing})
 
+<<<<<<< Updated upstream
+=======
+def search_view(request):
+    query = request.GET.get('q')
+    if query:
+        results = Listing.objects.filter(name__icontains=query)
+
+def arsa(request):
+    arsa_listesi = Listing.objects.filter(type='arsa')# 'kategori' field'ını arsa olanları alıyoruz
+    return render(request, 'arsa.html', {'arsalar': arsa_listesi})
+
+def ev(request):
+    ev_listesi = Listing.objects.filter(type='ev')# 'kategori' field'ını arsa olanları alıyoruz
+    return render(request, 'ev.html', {'evler': ev_listesi})
+
+def tarla(request):
+    tarla_listesi = Listing.objects.filter(type='tarla')
+    return render(request, 'tarla.html', {'tarlalar': tarla_listesi})
+
+>>>>>>> Stashed changes
 def add_listing(request):
     if request.method == 'POST':
         title = request.POST['title']

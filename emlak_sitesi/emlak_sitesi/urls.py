@@ -24,6 +24,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('listings.urls')),
     path('', views.home, name='home'),
+<<<<<<< Updated upstream
     path('listing/<int:pk>/', views.listing_detail, name='listing_detail'),
     path('add-listing/', views.add_listing, name='add_listing'),
+=======
+    path('arsa/', views.arsa, name='arsa'),  # Arsaların listelendiği sayfa
+    path('ev/', views.ev, name='ev'),
+    path('tarla/', views.tarla, name='tarla'), # Arsaların listelendiği sayfa
+
+>>>>>>> Stashed changes
 ]
