@@ -13,6 +13,8 @@ from .serializers import ListingSerializer
 from rest_framework.permissions import IsAdminUser
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Listing
+from django.shortcuts import render
+from .models import Listing
 
 
 class ListingList(APIView):
@@ -46,6 +48,19 @@ def home(request):
 def listing_detail(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, 'listing_detail.html', {'listing': listing})
+
+def search_view(request):
+    query = request.GET.get('q')
+    if query:
+        results = Listing.objects.filter(name__icontains=query)
+
+def arsa(request):
+    arsa_listesi = Listing.objects.filter(type='arsa')# 'kategori' field'ını arsa olanları alıyoruz
+    return render(request, 'arsa.html', {'arsa': arsa_listesi})
+
+def ev(request):
+    ev_listesi = Listing.objects.filter(type='ev')# 'kategori' field'ını arsa olanları alıyoruz
+    return render(request, 'ev.html', {'ev': ev_listesi})
 
 def add_listing(request):
     if request.method == 'POST':
