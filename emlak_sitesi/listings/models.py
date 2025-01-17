@@ -2,9 +2,11 @@ from django.db import models
 
 class Listing(models.Model):
     PROPERTY_TYPES = [
-        ('ev', 'Ev'),
+        ('daire', 'Daire'),
         ('arsa', 'Arsa'),
         ('tarla', 'Tarla'),
+        ('otel', 'Otel'),
+        ('diğer', 'Diğer')
     ]
 
     title = models.CharField(max_length=255)
